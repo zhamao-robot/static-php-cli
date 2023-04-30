@@ -91,7 +91,7 @@ jobs:
             tar -zcvf "dist/php-$PHPVER-micro-macos-x86_64.tar.gz" ./micro.sfx
           fi
           if [ -f "./php-fpm" ]; then
-            tar -zcvf "dist/php-$PHPVER-fpm-linux-x86_64.tar.gz" ./php-fpm
+            tar -zcvf "dist/php-$PHPVER-fpm-macos-x86_64.tar.gz" ./php-fpm
           fi
       - name: Deploy to Zhamao Server
         uses: easingthemes/ssh-deploy@main
