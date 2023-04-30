@@ -81,38 +81,6 @@ jobs:
       # Run build command
       - run: ./bin/spc build ${{ inputs.extensions }} ${{ env.SPC_BUILD_DEBUG }} ${{ env.SPC_BUILD_CLI }} ${{ env.SPC_BUILD_MICRO }} ${{ env.SPC_BUILD_FPM }}
 
-      # Upload cli executable
-      - if: ${{ inputs.build-cli == true }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: php-${{ inputs.version }}-${{ env.SPC_BUILD_OS }}
-          path: buildroot/bin/php
-
-      # Upload micro self-extracted executable
-      - if: ${{ inputs.build-micro == true }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: micro-${{ inputs.version }}-${{ env.SPC_BUILD_OS }}
-          path: buildroot/bin/micro.sfx
-
-      # Upload fpm executable
-      - if: ${{ inputs.build-fpm == true }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: php-fpm-${{ inputs.version }}-${{ env.SPC_BUILD_OS }}
-          path: buildroot/bin/php-fpm
-
-      # Upload extensions metadata
-      - uses: actions/upload-artifact@v3
-        with:
-          name: license-files
-          path: buildroot/license/
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build-meta
-          path: |
-            buildroot/build-extensions.json
-            buildroot/build-libraries.json
       - name: Pack PHP ${{ inputs.version }} to archive
         run: |
           PHPVER=$(cat source/php-src/main/php_version.h | grep "PHP_VERSION " | awk -F\" '{print $2}')
