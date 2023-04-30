@@ -113,3 +113,25 @@ jobs:
           path: |
             buildroot/build-extensions.json
             buildroot/build-libraries.json
+      - name: Pack PHP ${{ inputs.version }} to archive
+        run: |
+          PHPVER=$(cat source/php-src/main/php_version.h | grep "PHP_VERSION " | awk -F\" '{print $2}')
+          cd buildroot/bin
+          mkdir dist/
+          tar -zcvf "dist/php-$PHPVER-cli-macos-x86_64.tar.gz" ./php
+          if [ -f "./micro.sfx" ]; then
+            tar -zcvf "dist/php-$PHPVER-micro-macos-x86_64.tar.gz" ./micro.sfx
+          fi
+          if [ -f "./php-fpm" ]; then
+            tar -zcvf "dist/php-$PHPVER-fpm-linux-x86_64.tar.gz" ./php-fpm
+          fi
+      - name: Deploy to Zhamao Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SERVER_SECRET_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: "buildroot/dist/"
+          REMOTE_HOST: ${{ secrets.DEPLOY_SERVER_HOST }}
+          REMOTE_PORT: ${{ secrets.DEPLOY_SERVER_PORT }}
+          REMOTE_USER: ${{ secrets.DEPLOY_SERVER_USER }}
+          TARGET: ${{ secrets.DEPLOY_SERVER_TARGET }}
