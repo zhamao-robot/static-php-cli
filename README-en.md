@@ -2,10 +2,14 @@
 
 Compile A Statically Linked PHP With Swoole and other Extensions.
 
-Compile a purely static PHP binary file with various extensions to make PHP-cli applications more portable! 
+Compile a purely static php-cli binary file with various extensions to make PHP applications more portable! (cli SAPI)
 
-You can also use the micro binary file to package PHP source code and binary files into one for distribution!
-This function is provided by [dixyes/phpmicro](https://github.com/dixyes/phpmicro).
+<img width="600" alt="截屏2023-05-02 15 53 13" src="https://user-images.githubusercontent.com/20330940/235610282-23e58d68-bd35-4092-8465-171cff2d5ba8.png">
+
+You can also use the micro binary file to combine php binary and php source code into one for distribution!
+This feature is provided by [dixyes/phpmicro](https://github.com/dixyes/phpmicro). (micro SAPI)
+
+<img width="600" alt="截屏2023-05-02 15 52 33" src="https://user-images.githubusercontent.com/20330940/235610318-2ef4e3f1-278b-4ca4-99f4-b38120efc395.png">
 
 > This branch is new version, if you are looking for old bash version of static-php-cli, see [bash-version](https://github.com/crazywhalecc/static-php-cli/tree/bash-version).
 
@@ -13,6 +17,8 @@ This function is provided by [dixyes/phpmicro](https://github.com/dixyes/phpmicr
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)]()
 [![](https://img.shields.io/github/actions/workflow/status/crazywhalecc/static-php-cli/build-linux-x86_64.yml?branch=refactor&label=Linux%20Build&style=flat-square)](https://github.com/crazywhalecc/static-php-cli/actions/workflows/build.yml)
 [![](https://img.shields.io/github/actions/workflow/status/crazywhalecc/static-php-cli/build-macos-x86_64.yml?branch=refactor&label=macOS%20Build&style=flat-square)](https://github.com/crazywhalecc/static-php-cli/actions/workflows/build.yml)
+
+[![](https://img.shields.io/badge/Extension%20Counter-45+-yellow.svg?style=flat-square)]()
 [![](https://img.shields.io/github/search/crazywhalecc/static-php-cli/TODO?label=TODO%20Counter&style=flat-square)]()
 
 ## Compilation Requirements
@@ -23,11 +29,11 @@ But static-php-cli runtime only requires an environment above PHP 8.0 and `token
 Here is the architecture support status, where `CI` represents support for GitHub Action builds, 
 `Local` represents support for local builds, and blank represents not currently supported.
 
-|         | x86_64    | aarch64   | armv7l    |
-|---------|-----------|-----------|-----------|
-| macOS   | CI, Local | Local     |           |
-| Linux   | CI, Local | CI, Local | CI, Local |
-| Windows |           |           |           |
+|         | x86_64    | aarch64   |
+|---------|-----------|-----------|
+| macOS   | CI, Local | Local     |
+| Linux   | CI, Local | CI, Local |
+| Windows |           |           |
 
 > macOS-arm64 is not supported for GitHub Actions, if you are going to build on arm, you can build it manually on your own machine.
 
@@ -36,6 +42,12 @@ Currently supported PHP versions for compilation are: `7.4`, `8.0`, `8.1`, `8.2`
 ## Usage
 
 Please first select the extension you want to compile based on the extension list below.
+
+### Direct Download
+
+If you don't compile yourself, you can download pre-compiled artifact from Actions, or from self-hosted server: [Here](https://dl.zhamao.xin/static-php-cli/)
+
+> self-hosted server contains extensions: `bcmath,bz2,calendar,ctype,curl,dom,exif,fileinfo,filter,ftp,gd,gmp,iconv,xml,mbstring,mbregex,mysqlnd,openssl,pcntl,pdo,pdo_mysql,pdo_sqlite,phar,posix,redis,session,simplexml,soap,sockets,sqlite3,tokenizer,xmlwriter,xmlreader,zlib,zip`
 
 ### Supported Extensions
 

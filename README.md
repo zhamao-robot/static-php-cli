@@ -4,9 +4,13 @@ Compile A Statically Linked PHP With Swoole and other Extensions.
 
 If you are using English, see [English README](README-en.md).
 
-编译纯静态的 PHP Binary 二进制文件，带有各种扩展，让 PHP-cli 应用变得更便携！
+编译纯静态的 PHP Binary 二进制文件，带有各种扩展，让 PHP-cli 应用变得更便携！（cli SAPI）
 
-同时可以使用 micro 二进制文件，将 PHP 源码和 PHP 二进制构建为一个文件分发！（由 [dixyes/phpmicro](https://github.com/dixyes/phpmicro) 提供支持）
+<img width="600" alt="截屏2023-05-02 15 53 13" src="https://user-images.githubusercontent.com/20330940/235610282-23e58d68-bd35-4092-8465-171cff2d5ba8.png">
+
+同时可以使用 micro 二进制文件，将 PHP 源码和 PHP 二进制构建为一个文件分发！（由 [dixyes/phpmicro](https://github.com/dixyes/phpmicro) 提供支持）（micro SAPI）
+
+<img width="600" alt="截屏2023-05-02 15 52 33" src="https://user-images.githubusercontent.com/20330940/235610318-2ef4e3f1-278b-4ca4-99f4-b38120efc395.png">
 
 > 此分支为重构的新版，如果你在找纯 Bash 编写的旧版本，请到 [bash-version 分支](https://github.com/crazywhalecc/static-php-cli/tree/bash-version)。
 
@@ -14,6 +18,7 @@ If you are using English, see [English README](README-en.md).
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)]()
 [![](https://img.shields.io/github/actions/workflow/status/crazywhalecc/static-php-cli/build-linux-x86_64.yml?branch=refactor&label=Linux%20Build&style=flat-square)](https://github.com/crazywhalecc/static-php-cli/actions/workflows/build.yml)
 [![](https://img.shields.io/github/actions/workflow/status/crazywhalecc/static-php-cli/build-macos-x86_64.yml?branch=refactor&label=macOS%20Build&style=flat-square)](https://github.com/crazywhalecc/static-php-cli/actions/workflows/build.yml)
+[![](https://img.shields.io/badge/Extension%20Counter-45+-yellow.svg?style=flat-square)]()
 [![](https://img.shields.io/github/search/crazywhalecc/static-php-cli/TODO?label=TODO%20Counter&style=flat-square)]()
 
 ## 编译环境需求
@@ -36,6 +41,12 @@ If you are using English, see [English README](README-en.md).
 ## 使用
 
 请先根据下方扩展列表选择你要编译的扩展。
+
+### 自托管直接下载
+
+如果你不想自行编译，可以从本项目现有的 Action 下载 Artifact，也可以从自托管的服务器下载：[进入](https://dl.zhamao.xin/static-php-cli/)
+
+> 自托管的服务器默认包含的扩展有：`bcmath,bz2,calendar,ctype,curl,dom,exif,fileinfo,filter,ftp,gd,gmp,iconv,xml,mbstring,mbregex,mysqlnd,openssl,pcntl,pdo,pdo_mysql,pdo_sqlite,phar,posix,redis,session,simplexml,soap,sockets,sqlite3,tokenizer,xmlwriter,xmlreader,zlib,zip`
 
 ### 支持的扩展情况
 

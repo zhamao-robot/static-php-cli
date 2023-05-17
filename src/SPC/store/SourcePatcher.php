@@ -6,6 +6,7 @@ namespace SPC\store;
 
 use SPC\builder\BuilderBase;
 use SPC\builder\linux\LinuxBuilder;
+use SPC\builder\linux\SystemUtil;
 use SPC\builder\macos\MacOSBuilder;
 use SPC\exception\FileSystemException;
 use SPC\exception\RuntimeException;
@@ -84,6 +85,9 @@ class SourcePatcher
         if ($readline = $builder->getExt('readline')) {
             $patch[] = ['readline patch', '/-lncurses/', $readline->getLibFilesString()];
         }
+        if ($ssh2 = $builder->getExt('ssh2')) {
+            $patch[] = ['ssh2 patch', '/-lssh2/', $ssh2->getLibFilesString()];
+        }
         $patch[] = ['disable capstone', '/have_capstone="yes"/', 'have_capstone="no"'];
         foreach ($patch as $item) {
             logger()->info('Patching configure: ' . $item[0]);
@@ -98,6 +102,24 @@ class SourcePatcher
             REPLACE_FILE_STR,
             '-lz',
             BUILD_LIB_PATH . '/libz.a'
+        );
+        if (SystemUtil::getOSRelease()['dist'] === 'alpine') {
+            FileSystem::replaceFile(
+                SOURCE_PATH . '/libpng/configure',
+                REPLACE_FILE_STR,
+                '-lm',
+                '/usr/lib/libm.a'
+            );
+        }
+    }
+
+    public static function patchUnixSsh2(): void
+    {
+        FileSystem::replaceFile(
+            SOURCE_PATH . '/php-src/configure',
+            REPLACE_FILE_STR,
+            '-lssh2',
+            BUILD_LIB_PATH . '/libssh2.a'
         );
     }
 
@@ -117,7 +139,7 @@ class SourcePatcher
         );
     }
 
-    public static function patchMicro(): bool
+    public static function patchMicro(?array $list = null, bool $reverse = false): bool
     {
         if (!file_exists(SOURCE_PATH . '/php-src/sapi/micro/php_micro.c')) {
             return false;
@@ -137,7 +159,7 @@ class SourcePatcher
         $check = !defined('DEBUG_MODE') ? ' -q' : '';
         // f_passthru('cd ' . SOURCE_PATH . '/php-src && git checkout' . $check . ' HEAD');
 
-        $patch_list = [
+        $default = [
             'static_opcache',
             'static_extensions_win32',
             'cli_checks',
@@ -146,15 +168,13 @@ class SourcePatcher
             'win32',
             'zend_stream',
         ];
-        $patch_list = array_merge($patch_list, match (PHP_OS_FAMILY) {
-            'Windows' => [
-                'cli_static',
-            ],
-            'Darwin' => [
-                'macos_iconv',
-            ],
-            default => [],
-        });
+        if (PHP_OS_FAMILY === 'Windows') {
+            $default[] = 'cli_static';
+        }
+        if (PHP_OS_FAMILY === 'Darwin') {
+            $default[] = 'macos_iconv';
+        }
+        $patch_list = $list ?? $default;
         $patches = [];
         $serial = ['80', '81', '82'];
         foreach ($patch_list as $patchName) {
@@ -177,8 +197,9 @@ class SourcePatcher
 
         f_passthru(
             'cd ' . SOURCE_PATH . '/php-src && ' .
-            (PHP_OS_FAMILY === 'Windows' ? 'type' : 'cat') . ' ' . $patchesStr . ' | patch -p1'
+            (PHP_OS_FAMILY === 'Windows' ? 'type' : 'cat') . ' ' . $patchesStr . ' | patch -p1 ' . ($reverse ? '-R' : '')
         );
+
         return true;
     }
 
@@ -205,7 +226,7 @@ class SourcePatcher
         FileSystem::replaceFile(SOURCE_PATH . '/php-src/main/php_config.h', REPLACE_FILE_PREG, '/^#define HAVE_OPENPTY 1$/m', '');
 
         // patch openssl3 with php8.0 bug
-        if (file_exists(SOURCE_PATH . '/openssl/VERSION.dat') && Util::getPHPVersionID() >= 80000 && Util::getPHPVersionID() < 80100) {
+        if (file_exists(SOURCE_PATH . '/openssl/VERSION.dat') && Util::getPHPVersionID() < 80100) {
             $openssl_c = file_get_contents(SOURCE_PATH . '/php-src/ext/openssl/openssl.c');
             $openssl_c = preg_replace('/REGISTER_LONG_CONSTANT\s*\(\s*"OPENSSL_SSLV23_PADDING"\s*.+;/', '', $openssl_c);
             file_put_contents(SOURCE_PATH . '/php-src/ext/openssl/openssl.c', $openssl_c);
