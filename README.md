@@ -12,8 +12,6 @@ If you are using English, see [English README](README-en.md).
 
 <img width="600" alt="截屏2023-05-02 15 52 33" src="https://user-images.githubusercontent.com/20330940/235610318-2ef4e3f1-278b-4ca4-99f4-b38120efc395.png">
 
-> 此分支为重构的新版，如果你在找纯 Bash 编写的旧版本，请到 [bash-version 分支](https://github.com/crazywhalecc/static-php-cli/tree/bash-version)。
-
 [![Version](https://img.shields.io/badge/Version-2.0--rc1-pink.svg?style=flat-square)]()
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)]()
 [![](https://img.shields.io/github/actions/workflow/status/crazywhalecc/static-php-cli/build-linux-x86_64.yml?branch=refactor&label=Linux%20Build&style=flat-square)](https://github.com/crazywhalecc/static-php-cli/actions/workflows/build.yml)
@@ -73,9 +71,9 @@ If you are using English, see [English README](README-en.md).
 git clone https://github.com/crazywhalecc/static-php-cli.git
 ```
 
-如果你本机没有安装 PHP，你可以通过命令下载静态编译好的 php-cli 和 Composer。
+如果你本机没有安装 PHP，你需要先使用包管理（例如 brew、apt、yum、apk 等）安装 php。
 
-下载的 php 和 Composer 将保存为 `bin/php` 和 `bin/composer`。
+你也可以通过 `bin/setup-runtime` 命令下载静态编译好的 php-cli 和 Composer。下载的 php 和 Composer 将保存为 `bin/php` 和 `bin/composer`。
 
 ```bash
 cd static-php-cli
@@ -124,6 +122,14 @@ chmod +x bin/spc
 ./bin/spc build openssl,pcntl,mbstring --debug --build-all
 ./bin/spc fetch --all --debug
 ```
+
+此外，默认编译的 PHP 为 NTS 版本。如需编译线程安全版本（ZTS），只需添加参数 `--enable-zts` 即可。
+
+```bash
+./bin/spc build openssl,pcntl --build-all --enable-zts
+```
+
+同时，你也可以使用参数 `--no-strip` 来关闭裁剪，关闭裁剪后可以使用 gdb 等工具调试，但这样会让静态二进制体积变大。
 
 ### 使用 php-cli
 
@@ -194,6 +200,10 @@ cat micro.sfx code.php > single-app && chmod +x single-app
 
 另外，添加新扩展的贡献方式，可以参考下方 `进阶`。
 
+## 赞助本项目
+
+你可以在 [我的个人赞助页](https://github.com/crazywhalecc/crazywhalecc/blob/master/FUNDING.md) 支持我和我的项目。
+
 ## 开源协议
 
 本项目依据旧版本惯例采用 MIT License 开源，自身的部分代码引用或修改自以下项目：
@@ -202,7 +212,7 @@ cat micro.sfx code.php > single-app && chmod +x single-app
 - [swoole/swoole-cli](https://github.com/swoole/swoole-cli)（Apache 2.0 LICENSE、SWOOLE-CLI LICENSE）
 
 因本项目的特殊性，使用项目编译过程中会使用很多其他开源项目，例如 curl、protobuf 等，它们都有各自的开源协议。
-请在编译完成后，使用命令 `dump-license`(TODO) 导出项目使用项目的开源协议，并遵守对应项目的 LICENSE。
+请在编译完成后，使用命令 `bin/spc dump-license` 导出项目使用项目的开源协议，并遵守对应项目的 LICENSE。
 
 ## 进阶
 
