@@ -37,7 +37,11 @@ Here is the architecture support status, where `CI` represents support for GitHu
 
 Currently supported PHP versions for compilation are: `7.4`, `8.0`, `8.1`, `8.2`.
 
-## Usage
+## Docs
+
+docs here: <https://static-php-cli.zhamao.me>.
+
+## Simple Usage
 
 Please first select the extension you want to compile based on the extension list below.
 
@@ -49,7 +53,7 @@ If you don't compile yourself, you can download pre-compiled artifact from Actio
 
 ### Supported Extensions
 
-[Supported Extension List](/ext-support.md)
+[Supported Extension List](https://static-php-cli.zhamao.me/en/guide/extensions.html)
 
 > If there is no extension you need here, you can submit an issue.
 
@@ -100,7 +104,7 @@ Basic usage for building php and micro with some extensions:
 cd static-php-cli
 composer update
 chmod +x bin/spc
-# Check system tool dependencies, fix them automatically (only support macOS) (TODO: Linux distro support)
+# Check system tool dependencies, fix them automatically
 ./bin/spc doctor
 # fetch all libraries
 ./bin/spc fetch --all
@@ -216,6 +220,8 @@ The basic principles for contributing are as follows:
     and external library names should follow the project's own naming conventions. For internal logic functions, class names, variables, etc., 
     camelCase and underscore formats should be followed, and mixing within the same module is prohibited.
 - When compiling external libraries and creating patches, compatibility with different operating systems should be considered.
+
+If you want to contribute document content, please go to [crazywhalecc/static-php-cli-docs](https://github.com/crazywhalecc/static-php-cli-docs).
 
 ## Sponsor this project
 

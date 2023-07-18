@@ -36,6 +36,10 @@ If you are using English, see [English README](README-en.md).
 
 目前支持编译的 PHP 版本为：`7.4`，`8.0`，`8.1`，`8.2`。
 
+## 文档
+
+点击这里查看文档：<https://static-php-cli.zhamao.me>。
+
 ## 使用
 
 请先根据下方扩展列表选择你要编译的扩展。
@@ -48,7 +52,7 @@ If you are using English, see [English README](README-en.md).
 
 ### 支持的扩展情况
 
-[扩展支持列表](/ext-support.md)
+[扩展支持列表](https://static-php-cli.zhamao.me/zh/guide/extensions.html)
 
 > 如果这里没有你需要的扩展，可以提交 Issue。
 
@@ -94,7 +98,7 @@ chmod +x bin/setup-runtime
 cd static-php-cli
 composer update
 chmod +x bin/spc
-# 检查环境依赖，并根据提示的命令安装缺失的编译工具（目前仅支持 macOS，Linux 后续会支持）
+# 检查环境依赖，并根据提示的命令安装缺失的编译工具
 ./bin/spc doctor
 # 拉取所有依赖库
 ./bin/spc fetch --all
@@ -199,6 +203,8 @@ cat micro.sfx code.php > single-app && chmod +x single-app
 - 涉及编译外部库的命令和 Patch 时应注意兼容不同操作系统。
 
 另外，添加新扩展的贡献方式，可以参考下方 `进阶`。
+
+如果你想贡献文档内容，请到项目仓库 [crazywhalecc/static-php-cli-docs](https://github.com/crazywhalecc/static-php-cli-docs) 贡献。
 
 ## 赞助本项目
 
