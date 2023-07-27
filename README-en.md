@@ -11,13 +11,15 @@ This feature is provided by [dixyes/phpmicro](https://github.com/dixyes/phpmicro
 
 <img width="600" alt="截屏2023-05-02 15 52 33" src="https://user-images.githubusercontent.com/20330940/235610318-2ef4e3f1-278b-4ca4-99f4-b38120efc395.png">
 
-[![Version](https://img.shields.io/badge/Version-2.0--rc1-pink.svg?style=flat-square)]()
+[![Version](https://img.shields.io/badge/Version-2.0--rc2-pink.svg?style=flat-square)]()
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)]()
 [![](https://img.shields.io/github/actions/workflow/status/crazywhalecc/static-php-cli/build-linux-x86_64.yml?branch=refactor&label=Linux%20Build&style=flat-square)](https://github.com/crazywhalecc/static-php-cli/actions/workflows/build.yml)
 [![](https://img.shields.io/github/actions/workflow/status/crazywhalecc/static-php-cli/build-macos-x86_64.yml?branch=refactor&label=macOS%20Build&style=flat-square)](https://github.com/crazywhalecc/static-php-cli/actions/workflows/build.yml)
 
-[![](https://img.shields.io/badge/Extension%20Counter-50+-yellow.svg?style=flat-square)]()
+[![](https://img.shields.io/badge/Extension%20Counter-55+-yellow.svg?style=flat-square)]()
 [![](https://img.shields.io/github/search/crazywhalecc/static-php-cli/TODO?label=TODO%20Counter&style=flat-square)]()
+
+> After the project releases the last RC version (maybe no more than 5 candidate releases), the project will rename the `refactor` branch to the `main` branch, please pay attention to changing the branch name for dependent projects.
 
 ## Compilation Requirements
 
@@ -223,6 +225,11 @@ The basic principles for contributing are as follows:
 
 If you want to contribute document content, please go to [crazywhalecc/static-php-cli-docs](https://github.com/crazywhalecc/static-php-cli-docs).
 
+Part of the English document is written by me, and part is translated by Google,
+and there may be inaccurate descriptions, strange or offensive expressions.
+If you are a native English speaker, some corrections to the documentation are welcome.
+
+
 ## Sponsor this project
 
 You can sponsor my project on [this page](https://github.com/crazywhalecc/crazywhalecc/blob/master/FUNDING.md).
@@ -244,6 +251,6 @@ and comply with the corresponding project's LICENSE.
 
 ## Advanced
 
-This project is pure open source project, and some modules are separated for developing.
-
-This section will be improved after refactor version released.
+The refactoring branch of this project is written modularly. 
+If you are interested in this project and want to join the development,
+you can refer to the [Contribution Guide](https://static-php-cli.zhamao.me) of the documentation to contribute code or documentation. (TODO)

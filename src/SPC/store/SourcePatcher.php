@@ -48,9 +48,33 @@ class SourcePatcher
             file_put_contents(SOURCE_PATH . '/php-src/ext/curl/config.m4', $file1 . "\n" . $files . "\n" . $file2);
         }
 
-        // if ($builder->getExt('pdo_sqlite')) {
-        //    FileSystem::replaceFile()
-        // }
+        if ($builder->getExt('memcache')) {
+            FileSystem::replaceFile(
+                SOURCE_PATH . '/php-src/ext/memcache/config9.m4',
+                REPLACE_FILE_STR,
+                'if test -d $abs_srcdir/src ; then',
+                'if test -d $abs_srcdir/main ; then'
+            );
+            FileSystem::replaceFile(
+                SOURCE_PATH . '/php-src/ext/memcache/config9.m4',
+                REPLACE_FILE_STR,
+                'export CPPFLAGS="$CPPFLAGS $INCLUDES"',
+                'export CPPFLAGS="$CPPFLAGS $INCLUDES -I$abs_srcdir/main"'
+            );
+            // add for in-tree building
+            file_put_contents(
+                SOURCE_PATH . '/php-src/ext/memcache/php_memcache.h',
+                <<<'EOF'
+#ifndef PHP_MEMCACHE_H
+#define PHP_MEMCACHE_H
+
+extern zend_module_entry memcache_module_entry;
+#define phpext_memcache_ptr &memcache_module_entry
+
+#endif
+EOF
+            );
+        }
     }
 
     public static function patchSwow(): bool
@@ -87,6 +111,9 @@ class SourcePatcher
         }
         if ($ssh2 = $builder->getExt('ssh2')) {
             $patch[] = ['ssh2 patch', '/-lssh2/', $ssh2->getLibFilesString()];
+        }
+        if ($pgsql = $builder->getExt('pgsql')) {
+            $patch[] = ['pgsql patch', '/-lpq/', $pgsql->getLibFilesString()];
         }
         $patch[] = ['disable capstone', '/have_capstone="yes"/', 'have_capstone="no"'];
         foreach ($patch as $item) {

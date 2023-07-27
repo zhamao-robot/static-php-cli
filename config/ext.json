@@ -53,6 +53,19 @@
             "sockets"
         ]
     },
+    "memcached": {
+        "type": "external",
+        "source": "memcached",
+        "arg-type": "custom",
+        "cpp-extension": true,
+        "lib-depends": [
+            "libmemcached"
+        ],
+        "ext-depends": [
+            "session",
+            "zlib"
+        ]
+    },
     "exif": {
         "type": "builtin"
     },
@@ -138,6 +151,7 @@
     },
     "intl": {
         "type": "builtin",
+        "cpp-extension": true,
         "lib-depends": [
             "icu"
         ]
@@ -151,8 +165,9 @@
     },
     "mbregex": {
         "type": "builtin",
-        "lib-depends": [
-            "onig"
+        "arg-type": "custom",
+        "ext-depends": [
+            "mbstring"
         ]
     },
     "mbstring": {
@@ -160,6 +175,17 @@
         "arg-type": "custom",
         "lib-depends": [
             "onig"
+        ]
+    },
+    "memcache": {
+        "type": "external",
+        "source": "ext-memcache",
+        "arg-type": "custom",
+        "lib-depends": [
+            "zlib"
+        ],
+        "ext-depends": [
+            "session"
         ]
     },
     "mongodb": {
@@ -211,12 +237,13 @@
     },
     "pdo_pgsql": {
         "type": "builtin",
-        "arg-type": "with",
+        "arg-type": "with-prefix",
         "ext-depends": [
-            "pdo"
+            "pdo",
+            "pgsql"
         ],
         "lib-depends": [
-            "pq"
+            "postgresql"
         ]
     },
     "pdo_sqlite": {
@@ -228,6 +255,13 @@
         ],
         "lib-depends": [
             "sqlite"
+        ]
+    },
+    "pgsql": {
+        "type": "builtin",
+        "arg-type": "with-prefix",
+        "lib-depends": [
+            "postgresql"
         ]
     },
     "phar": {
@@ -320,6 +354,7 @@
         "type": "external",
         "source": "swoole",
         "arg-type": "custom",
+        "cpp-extension": true,
         "lib-depends": [
             "openssl"
         ],

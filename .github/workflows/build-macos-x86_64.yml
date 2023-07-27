@@ -105,8 +105,3 @@ jobs:
           REMOTE_USER: ${{ secrets.DEPLOY_SERVER_USER }}
           TARGET: ${{ secrets.DEPLOY_SERVER_TARGET }}
 
-      # Upload downloaded files
-      - uses: actions/upload-artifact@v3
-        with:
-          name: download-files
-          path: downloads/

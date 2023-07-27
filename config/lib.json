@@ -381,7 +381,19 @@
     "postgresql": {
         "source": "postgresql",
         "static-libs-unix": [
-            "libpg.a"
+            "libpq.a",
+            "libpgport.a",
+            "libpgcommon.a"
+        ],
+        "lib-depends": [
+            "libiconv",
+            "libxml2",
+            "openssl",
+            "zlib",
+            "readline"
+        ],
+        "lib-suggests": [
+            "icu"
         ]
     },
     "pthreads4w": {
@@ -448,6 +460,13 @@
         "headers": [
             "zlib.h",
             "zconf.h"
+        ]
+    },
+    "libmemcached": {
+        "source": "libmemcached",
+        "static-libs-unix": [
+            "libmemcached.a",
+            "libmemcachedutil.a"
         ]
     },
     "zstd": {

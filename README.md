@@ -2,7 +2,7 @@
 
 Compile A Statically Linked PHP With Swoole and other Extensions. 
 
-If you are using English, see [English README](README-en.md).
+**If you are using English, see [English README](README-en.md).**
 
 编译纯静态的 PHP Binary 二进制文件，带有各种扩展，让 PHP-cli 应用变得更便携！（cli SAPI）
 
@@ -12,12 +12,14 @@ If you are using English, see [English README](README-en.md).
 
 <img width="600" alt="截屏2023-05-02 15 52 33" src="https://user-images.githubusercontent.com/20330940/235610318-2ef4e3f1-278b-4ca4-99f4-b38120efc395.png">
 
-[![Version](https://img.shields.io/badge/Version-2.0--rc1-pink.svg?style=flat-square)]()
+[![Version](https://img.shields.io/badge/Version-2.0--rc2-pink.svg?style=flat-square)]()
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)]()
 [![](https://img.shields.io/github/actions/workflow/status/crazywhalecc/static-php-cli/build-linux-x86_64.yml?branch=refactor&label=Linux%20Build&style=flat-square)](https://github.com/crazywhalecc/static-php-cli/actions/workflows/build.yml)
 [![](https://img.shields.io/github/actions/workflow/status/crazywhalecc/static-php-cli/build-macos-x86_64.yml?branch=refactor&label=macOS%20Build&style=flat-square)](https://github.com/crazywhalecc/static-php-cli/actions/workflows/build.yml)
-[![](https://img.shields.io/badge/Extension%20Counter-50+-yellow.svg?style=flat-square)]()
+[![](https://img.shields.io/badge/Extension%20Counter-55+-yellow.svg?style=flat-square)]()
 [![](https://img.shields.io/github/search/crazywhalecc/static-php-cli/TODO?label=TODO%20Counter&style=flat-square)]()
+
+> 在项目发布最后一个 RC 版本后（可能不超过 5 个候选版），项目将会重命名 `refactor` 分支为 `main` 分支，请依赖的项目注意更改分支名称。
 
 ## 编译环境需求
 
@@ -222,6 +224,4 @@ cat micro.sfx code.php > single-app && chmod +x single-app
 
 ## 进阶
 
-本项目重构分支为模块化编写。
-
-TODO：这部分将在基础功能完成后编写完成。
+本项目重构分支为模块化编写。如果你对本项目感兴趣，想加入开发，可以参照文档的 [贡献指南](https://static-php-cli.zhamao.me) 贡献代码或文档。（TODO）

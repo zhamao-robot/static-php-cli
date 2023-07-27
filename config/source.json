@@ -16,6 +16,25 @@
             "path": "LICENSE"
         }
     },
+    "memcached": {
+        "type": "url",
+        "url": "https://pecl.php.net/get/memcached",
+        "path": "php-src/ext/memcached",
+        "filename": "memcached.tgz",
+        "license": {
+            "type": "file",
+            "path": "LICENSE"
+        }
+    },
+    "libmemcached": {
+        "type": "git",
+        "url": "https://github.com/crazywhalecc/libmemcached-macos.git",
+        "rev": "master",
+        "license": {
+            "type": "file",
+            "path": "COPYING"
+        }
+    },
     "brotli": {
         "type": "ghtar",
         "repo": "google/brotli",
@@ -56,6 +75,16 @@
         "url": "https://pecl.php.net/get/imagick",
         "path": "php-src/ext/imagick",
         "filename": "imagick.tgz",
+        "license": {
+            "type": "file",
+            "path": "LICENSE"
+        }
+    },
+    "ext-memcache": {
+        "type": "url",
+        "url": "https://pecl.php.net/get/memcache",
+        "path": "php-src/ext/memcache",
+        "filename": "memcache.tgz",
         "license": {
             "type": "file",
             "path": "LICENSE"
@@ -318,7 +347,8 @@
         }
     },
     "postgresql": {
-        "type": "custom",
+        "type": "url",
+        "url": "https://ftp.postgresql.org/pub/source/v15.1/postgresql-15.1.tar.gz",
         "license": {
             "type": "file",
             "path": "COPYRIGHT"
